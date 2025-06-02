@@ -1,4 +1,3 @@
-# algorithms
 import numpy as np
 
 def backtracking(f, x, pk):
@@ -40,7 +39,8 @@ class LineSearchMinimizer:
             path_f.append(fx)
             
             alpha = backtracking(f, x, pk)
-            print(f"Iteration {i}: x = {x}, f(x) = {fx}, a = {alpha}")
+            prt = f"Iteration {i}: x = {x}, f(x) = {fx}, a = {alpha}"
+            print(prt)
             x += alpha * pk
 
             # Termination conditions
@@ -59,7 +59,7 @@ class LineSearchMinimizer:
                     success = True
                     break
 
-        return x, fx, success, np.array(path_x), np.array(path_f)
+        return x, fx, success, prt, np.array(path_x), np.array(path_f)
 
 
 
