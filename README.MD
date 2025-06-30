@@ -2,7 +2,7 @@
 ## Programming Assignment 02
 **Author:** Gabriel Mazor
 
-[GitHub Link](https://github.com/gabrielmazor/)
+[GitHub Link](https://github.com/gabrielmazor/mlds-numerical-optimization)
 
 ---
 ### Quadratic Programming
