@@ -10,7 +10,6 @@ def backtracking(f, x, pk):
         alpha *= rho
         fxalpha, _, _= f(x + alpha * pk, False)
     return alpha
-        
 
 class LineSearchMinimizer:
     def __init__(self, method = 'gd'):
@@ -60,6 +59,3 @@ class LineSearchMinimizer:
                     break
 
         return x, fx, success, prt, np.array(path_x), np.array(path_f)
-
-
-

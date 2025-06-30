@@ -1,5 +1,6 @@
 import numpy as np
 
+# Unconstrained examples
 def quadratic_1(x, hessian = False):
     Q = np.array([[1,0], [0,1]])
     f = x.T @ Q @ x
@@ -63,3 +64,89 @@ def exponential(x, hessian = False):
         h = None
     
     return f, g, h
+
+# Constrained examples
+# Linear programming example
+def lp_objective(x, hessian = False):
+    f = x[0] + x[1]
+    g = np.array([1.0, 1.0])
+    h = np.zeros((2, 2)) if hessian else None
+
+    return -f, -g, h
+
+# Inequality constraints
+def lp_halfplane(x, hessian = False):
+    f = -x[0] - x[1] + 1
+    g = np.array([-1.0, -1.0])
+    h = np.zeros((2, 2)) if hessian else None
+
+    return f, g, h
+
+def lp_y_ineq(x, hessian = False):
+    f = x[1] - 1
+    g = np.array([0.0, 1.0])
+    h = np.zeros((2, 2)) if hessian else None
+
+    return f, g, h
+
+def lp_y_nonneg(x, hessian = False):
+    y = - x[1]
+    g = np.array([0.0, -1.0])
+    h = np.zeros((2, 2)) if hessian else None
+
+    return y, g, h
+
+def lp_x_ineq(x, hessian = False):
+    f = x[0] - 2
+    g = np.array([1.0, 0.0])
+    h = np.zeros((2, 2)) if hessian else None
+
+    return f, g, h
+
+lp_ineq_constraints = [lp_halfplane, lp_y_ineq, lp_y_nonneg, lp_x_ineq]
+
+# Equality constraints
+lp_eq_mat = None
+lp_eq_rhs = None
+
+# Initial point
+lp_x0 = np.array([0.5, 0.75])
+
+# Quadratic programming example
+def qp_objective(x, hessian = False):
+    f = x[0]**2 + x[1]**2 +(x[2]+1)**2
+    g = np.array([2*x[0], 2*x[1], 2*(x[2]+1)])
+    h = np.diag([2.0, 2.0, 2.0]) if hessian else None
+
+    return f, g, h
+
+# Inquality constraints
+def qp_x_nonneg(x, hessian = False):
+    x = -x[0]
+    g = np.array([-1.0, 0.0, 0.0])
+    h = np.zeros((3, 3)) if hessian else None
+
+    return x, g, h
+
+def qp_y_nonneg(x, hessian = False):
+    y = -x[1]
+    g = np.array([0.0, -1.0, 0.0])
+    h = np.zeros((3, 3)) if hessian else None
+
+    return y, g, h
+
+def qp_z_nonneg(x, hessian = False):
+    z = -x[2]
+    g = np.array([0.0, 0.0, -1.0])
+    h = np.zeros((3, 3)) if hessian else None
+
+    return z, g, h
+
+qp_ineq_constraints = [qp_x_nonneg, qp_y_nonneg, qp_z_nonneg]
+
+# Equality constraints
+qp_eq_mat = np.array([[1.0, 1.0, 1.0]])
+qp_eq_rhs = np.array([1.0])
+
+# Initial point
+qp_x0 = np.array([0.1, 0.2, 0.7])
